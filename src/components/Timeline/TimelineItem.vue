@@ -1,6 +1,11 @@
 <script setup lang="ts">
 defineProps<{
   reverse?: boolean;
+  item: {
+    title: string;
+    description: string;
+    timestamp: Date;
+  };
 }>();
 </script>
 <template>
@@ -20,12 +25,18 @@ defineProps<{
     <div
       class="rounded-md border-4 md:border-8 border-sky-900 p-2 bg-white w-7/8 sm:max-w-[400px] justify-self-start"
     >
-      <h2 class="font-bold md:text-3xl mb-2 ltr">The title on it (2023-01)</h2>
-      <p class="font-light text-sm md:text-md ltr">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores,
-        aspernatur porro ea at minima, nostrum, modi deserunt iusto placeat
-        molestiae iure. Aliquid mollitia error veniam inventore, animi obcaecati
-        amet culpa?
+      <h2 class="font-bold md:text-2xl mb-2 ltr">
+        {{ item.title }} ({{
+          Intl.DateTimeFormat('pt-BR', {
+            month: 'numeric',
+            year: 'numeric',
+          })
+            .format(item.timestamp)
+            .toString()
+        }})
+      </h2>
+      <p class="font-light text-sm md:text-xl ltr">
+        {{ item.description }}
       </p>
     </div>
   </div>
